@@ -265,5 +265,3 @@ class Note:
                 return print(f"{Fore.RED}{Style.BRIGHT}Not silinirken bir sorun oluştu, lütfen tekrar deneyiniz.{Style.RESET_ALL}")
         else:
             return print(f"{Fore.RED}{Style.BRIGHT}Dosya bulunamadı. Lütfen tekrar deneyiniz.{Style.RESET_ALL}\n")
-
-Note.dialog()
