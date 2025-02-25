@@ -128,7 +128,6 @@ class Apps:
             cmds+=f"{i}"
         else:
             cmds+=f"{i}, "
-    
     def note():
         app.Note.dialog()
         return Apps.another_action()
@@ -139,7 +138,9 @@ class Apps:
         app.Passgen.dialog()
         return Apps.another_action()
     def news():
+        app.News.dialog()
         return Apps.another_action()
+
     def another_action():
         print(f"{Fore.YELLOW}\nBaşka bir işlem yapmak ister misiniz?")
         choice = input(f"(1. Evet / 2. Hayır): {Style.RESET_ALL}")
@@ -151,5 +152,5 @@ class Apps:
         elif choice == "2":
             return Prefs.savePrefs()
 # Trigger
+
 MainFuncs.cli_start()
-    

@@ -8,7 +8,7 @@ from datetime import datetime
 import pytz
 from pathlib import Path
 import os
-
+import webbrowser as wb
 
 class Main: # This class includes essential functions will be used in apps
     def printg(x):
@@ -37,7 +37,12 @@ class Main: # This class includes essential functions will be used in apps
                     pass
                 else:
                     return var
-    
+    def str_range(start,end):
+        range_list = list()
+        while start<end:
+            range_list.append(str(start))
+            start+=1
+        return range_list
 class Passgen: # Password Generator App's Class
     
     # Character Variant Lists
@@ -48,7 +53,7 @@ class Passgen: # Password Generator App's Class
     
     # The main dialog function
     def dialog():
-        Main.printg("Koray.PASS Şifre Oluşturma Aracı - sürüm 0.1")
+        Main.printg("Koray.PASS Şifre Oluşturma Aracı - sürüm 1.0")
         
         while True: # This while loop prevents the ValueError.
             try:
@@ -133,7 +138,7 @@ class Passgen: # Password Generator App's Class
             return
 class Weather:
     def dialog():
-        Main.printg("Koray.WEATHER Hava Durumu Aracı - sürüm 0.1")
+        Main.printg("Koray.WEATHER Hava Durumu Aracı - sürüm 1.0")
         print(f"\n{Style.BRIGHT}Lütfen hava durumunu öğrenmek istediğiniz şehir veya ilçeyi giriniz: (Çıkmak için 'çıkış'){Style.RESET_ALL}")
         place = input()
         while True:
@@ -182,7 +187,7 @@ class Weather:
             print("Hata:", response.status_code)
 class Note:
     def dialog():
-        Main.printg(f"{Style.NORMAL}\nKoray.NOTES Not Defteri Aracı - sürüm 0.1\n")
+        Main.printg(f"{Style.NORMAL}\nKoray.NOTES Not Defteri Aracı - sürüm 1.0\n")
         print(f"{Style.BRIGHT}{Fore.YELLOW}>> İşlem Menüsü\n{Style.RESET_ALL}{Style.BRIGHT}{Fore.CYAN}1.{Style.RESET_ALL} Notları Listele\n{Style.BRIGHT}{Fore.CYAN}2.{Style.RESET_ALL} Not Oluştur\n{Style.BRIGHT}{Fore.CYAN}3.{Style.RESET_ALL} Not Görüntüle\n{Style.BRIGHT}{Fore.CYAN}4.{Style.RESET_ALL} Not Sil\n{Style.BRIGHT}{Fore.CYAN}5.{Style.RESET_ALL} Çıkış")
         choice = Main.choice_dialog("Lütfen bir işlem seçiniz: ","Geçersiz işlem, lütfen geçerli bir işlem seçiniz.","var not in ('1', '2', '3', '4', '5')")
         print()
@@ -243,7 +248,7 @@ class Note:
             file_name = file_name[:-4]
         if file_name+".txt" in Note.note_list:        
             try:
-                with open("notes/"+file_name+".txt","r") as viewed_note:
+                with open("notes/"+file_name+".txt","r",encoding='UTF-8') as viewed_note:
                     print(f"\n{Style.RESET_ALL}{Back.CYAN}{file_name}.txt - {Style.BRIGHT}[Okuma Modu]{Style.RESET_ALL}")
                     for note_line in viewed_note:
                         print(note_line.strip())
@@ -265,3 +270,77 @@ class Note:
                 return print(f"{Fore.RED}{Style.BRIGHT}Not silinirken bir sorun oluştu, lütfen tekrar deneyiniz.{Style.RESET_ALL}")
         else:
             return print(f"{Fore.RED}{Style.BRIGHT}Dosya bulunamadı. Lütfen tekrar deneyiniz.{Style.RESET_ALL}\n")
+class News:
+    source_dict = {
+        "Mynet Haber":"News.getNews('Mynet Haber','https://haber.mynet.com/','h3','card-text-title py-2 px-3',ex_arg='news_title.pop(-1)')",
+        "Hürriyet":"News.getNews('Hürriyet','https://www.hurriyet.com.tr/','a','box__content box-lg-3__content')",
+        "Sözcü":"News.getNews('Sözcü','https://www.sozcu.com.tr/','a','news-card-footer',limit=20)",
+        "HaberTürk":"News.getNews('HaberTürk','https://www.haberturk.com','a','block gtm-tracker',start=14,limit=34)",
+        "NTV Haber":"News.getNews('NTV Haber','https://www.ntv.com.tr/','a','card-text-link',start=16,limit=36,ex_arg='news_title.pop(2)')"
+        }
+        
+    def dialog():
+        Main.printg("Koray.NEWS Haber Önizleme Aracı - sürüm 1.0")
+        print(f"\n{Style.BRIGHT}Mevcut Haber Kaynakları:{Style.RESET_ALL}")
+        for source in News.source_dict.keys():
+            print(f"{Style.BRIGHT}{Fore.YELLOW}{list(News.source_dict.keys()).index(source)+1}. {Fore.WHITE}{source}{Style.RESET_ALL}")
+        choice = Main.choice_dialog(f"{Style.BRIGHT}{Fore.BLUE}Lütfen başlıklarını önizlemek istediğiniz haber kaynağını seçiniz:{Fore.WHITE} (çıkmak için 'çıkış'){Style.RESET_ALL}\n",'Hatalı seçim. Lütfen tekrar deneyiniz.','var not in ("1","2","3","4","5","çıkış")')
+        if choice == 'çıkış':
+            return
+        return exec(News.source_dict[list(News.source_dict.keys())[(int(choice)-1)]])
+    def getNews(name,url,title_element,title_class,ex_arg=None,start=0,limit=None):
+        response = requests.get(url)
+        if response.status_code == 200:
+            html_site =response.text
+            soup = bs(html_site, "lxml")
+            news_title = soup.find_all(title_element,class_=title_class)
+            not_represented_list = []
+            for title in news_title:
+                if title in not_represented_list:
+                    continue
+                else:
+                    not_represented_list.append(title)
+            news_title = not_represented_list
+            if ex_arg != None:
+                exec(ex_arg)
+            for title in news_title:
+                if title.text.strip() == '' or title.text == '' or title.text.strip() == ' ':
+                    news_title.remove(title)
+            if limit != None:
+                news_title = news_title[start:limit+1]
+            print(f"{Back.RED}{Fore.WHITE}{Style.BRIGHT}Kaynak:{Back.CYAN}{name}{Style.RESET_ALL}\n")
+            for title in news_title:
+                print(f"{Style.BRIGHT}{Fore.CYAN}{str(news_title.index(title))}.{Style.RESET_ALL} {title.text.strip()}")
+                
+            count_of_titles = len(news_title)
+            choice = Main.choice_dialog(f"{Style.BRIGHT}Lütfen açmak için bir haber seçiniz: (çıkmak için 'çıkış')\n","Geçersiz haber ID'si!",f"var not in (Main.str_range(0,{count_of_titles})+['çıkış'])")
+            if choice == 'çıkış':
+                return News.dialog()
+            else:
+                if title_element == 'a':
+                    if news_title[int(choice)].get('href')[:3] != "htt":
+                        choice_link = url + news_title[int(choice)].get('href')
+                    else:
+                        choice_link = news_title[int(choice)].get('href')
+                    print(f"'{Fore.GREEN}{news_title[int(choice)].text.strip()}' isimli haber tarayıcıda açılıyor...{Style.RESET_ALL}")
+                    wb.open(choice_link)
+                    another = Main.true_false_dialog('Aynı kaynakta başka bir habere bakmak ister misiniz?: (1- Evet / 2- Hayır)\n')
+                    if another == '1':
+                        return News.getNews(name,url,title_element,title_class,ex_arg,start,limit)
+                    else:
+                        return News.dialog()
+                else:
+                    if news_title[int(choice)].find('a').get('href')[:3] != "htt":
+                        choice_link = url + news_title[int(choice)].find('a').get('href')
+                    else:
+                        choice_link = news_title[int(choice)].find('a').get('href')
+                    print(f"'{Fore.GREEN}{news_title[int(choice)].text.strip()}' isimli haber tarayıcıda açılıyor...{Style.RESET_ALL}")
+                    wb.open(choice_link)
+                    another = Main.true_false_dialog('Aynı kaynakta başka bir habere bakmak ister misiniz?: (1- Evet / 2- Hayır)\n')
+                    if another == '1':
+                        return News.getNews(name,url,title_element,title_class,ex_arg,start,limit)
+                    else:
+                        return News.dialog()
+        else:
+            print("Sunucu ile bağlantı kurulamadı.")
+            return News.dialog()
