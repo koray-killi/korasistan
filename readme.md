@@ -21,7 +21,6 @@
   - [4.3 📝 Not Defteri (Note)](#43-📝-not-defteri-note)
   - [4.4 📰 Haber Önizleme (News)](#44-📰-haber-önizleme-news)
 - [5. Geliştirme ve Katkıda Bulunma](#5-geliştirme-ve-katkıda-bulunma)
-- [6. Lisans](#6-lisans)
 
 ---
 
