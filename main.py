@@ -93,16 +93,20 @@ class MainFuncs:
         Prefs.importPrefs()
         print(Style.RESET_ALL) # To reset style, actually basically not that important.
         print(Fore.GREEN +"~"*60 + Fore.CYAN)
-        print('''
-| | _____  _ __ __ _ ___(_)___| |_ __ _ _ __    / _ \ / |
-| |/ / _ \| '__/ _` / __| / __| __/ _` | '_ \  | | | || |
-|   < (_) | | | (_| \__ \ \__ \ || (_| | | | | | |_| || |
-|_|\_\___/|_|  \__,_|___/_|___/\__\__,_|_| |_|  \___(_)_|
-''')
+        ascii_art = '''
+  _                       _     _                __   ___  
+ | |                     (_)   | |              /_ | / _ \ 
+ | | _____  _ __ __ _ ___ _ ___| |_ __ _ _ __    | || | | |
+ | |/ / _ \| '__/ _` / __| / __| __/ _` | '_ \   | || | | |
+ |   < (_) | | | (_| \__ \ \__ \ || (_| | | | |  | || |_| |
+ |_|\_\___/|_|  \__,_|___/_|___/\__\__,_|_| |_|  |_(_)___/ 
+                                                           
+                                                           '''
+        print(ascii_art)
         print(Fore.GREEN +"~"*60)
         return Prefs.inputprefer(True)
     def cli_microphone():
-        print(f"\n Kabul edilebilir komutlar: {Apps.cmds}")
+        print(f"\n{Style.RESET_ALL}{Fore.GREEN}* Kabul edilebilir komutlar: {Apps.cmds}")
         input = MainFuncs.getInput()
         MainFuncs.selectApp(input)
     def cli_text():

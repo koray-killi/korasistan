@@ -1,47 +1,72 @@
-# Kor-Asistan v0.1 🚀
+# Korasistan v1.0 📌
 
-Kor-Asistan, sesli veya yazılı komutlarla çalışan, modüler ve genişletilebilir bir CLI asistanıdır. Kullanıcı dostu arayüzü, hata yönetimi ve farklı uygulamaları entegre edebilme yeteneği ile kişisel kullanım için güçlü bir araçtır.
-
----
-
-## 🎯 **Özellikler**
-
-### ✅ **Genel Özellikler:**
-- 🎙️ **Sesli ve Yazılı Komut Desteği** (speech_recognition)
-- 🎨 **Renkli ve Anlaşılır Çıktılar** (colorama)
-- ⚙️ **Komut Alma Tercihlerini Kaydetme ve Okuma**
-- 🏗️ **Tamamen Modüler Yapı** – Yeni uygulamalar kolayca eklenebilir.
-- 🔄 **Kullanıcı Dostu Menü ve Hata Yönetimi**
-
-### 🔹 **Mevcut Uygulamalar:**
-#### 🔑 **Şifre Oluşturucu (Passgen)**
-- **Güçlü ve rastgele şifreler üretir.**
-- **Türkçe karakter desteğiyle özelleştirilmiş algoritma.**
-- **Özel karakter, büyük harf ve sayı tercihlerine göre şifre oluşturma.**
-- **Otomatik panoya kopyalama desteği (pyperclip).**
-
-#### ☁️ **Hava Durumu Uygulaması**
-- **API kullanarak gerçek zamanlı hava durumu verilerini çeker.**
-- **Kullanıcının girdiği şehir için sıcaklık, hissedilen sıcaklık ve hava durumu bilgilerini gösterir.**
-- **Güneşin doğuş ve batış saatlerini hesaplar.**
-- **Kapsamlı hata yönetimi içerir.**
-
-#### 📝 **Not Defteri Uygulaması**
-- **Not oluşturma, listeleme, okuma ve silme işlemleri yapılabilir.**
-- **Dosya tabanlı kayıt sistemi ile notlar kalıcıdır.**
-- **Kullanıcı dostu hata yönetimi ve rehberlik mesajları içerir.**
+**Author: koray-killi**
 
 ---
 
-## 🚀 **Kurulum**
+## 📜 İçindekiler
 
-Öncelikle, bağımlılıkları yükleyin:
+- [1. Giriş](#1-giriş)
+  - [1.1 Proje Tanımı](#11-proje-tanımı)
+  - [1.2 Özellikler](#12-özellikler)
+- [2. Kurulum](#2-kurulum)
+  - [2.1 Gereksinimler](#21-gereksinimler)
+  - [2.2 Yükleme Adımları](#22-yükleme-adımları)
+- [3. Kullanım](#3-kullanım)
+  - [3.1 Terminal Komutları](#31-terminal-komutları)
+  - [3.2 Sesli Komutlar](#32-sesli-komutlar)
+- [4. Uygulama Modülleri](#4-uygulama-modülleri)
+  - [4.1 🔑 Şifre Oluşturucu (Passgen)](#41-şifre-oluşturucu-passgen)
+  - [4.2 🌦 Hava Durumu (Weather)](#42-hava-durumu-weather)
+  - [4.3 📝 Not Defteri (Note)](#43-not-defteri-note)
+  - [4.4 📰 Haber Önizleme (News)](#44-haber-önizleme-news)
+- [5. Geliştirme ve Katkıda Bulunma](#5-geliştirme-ve-katkıda-bulunma)
+- [6. Lisans](#6-lisans)
+
+---
+
+## 1. Giriş
+
+### 1.1 Proje Tanımı
+
+**Korasistan**, terminal tabanlı, sesli ve yazılı komutları destekleyen, modüler bir kişisel asistan uygulamasıdır. Kullanıcılara şifre oluşturma, hava durumu sorgulama, not alma ve haber başlıklarını görüntüleme gibi özellikler sunar.
+
+### 1.2 Özellikler
+
+- 🎙 **Sesli ve Yazılı Komut Desteği**
+- 📜 **Modüler Yapı** (Kolayca yeni özellikler eklenebilir)
+- 🎨 **Renkli ve Kullanıcı Dostu Arayüz** (`colorama` ile)
+- 🔑 **Güçlü Şifre Üretme Sistemi**
+- 🌦 **Gerçek Zamanlı Hava Durumu API Kullanımı**
+- 📝 **Dosya Tabanlı Not Tutma Sistemi**
+- 📰 **Haber Kaynaklarından Otomatik Veri Çekme**
+
+---
+
+## 2. Kurulum
+
+### 2.1 Gereksinimler
+
+Korasistan’ı çalıştırmak için aşağıdaki yazılımlar gereklidir:
+
+- Python 3.x
+- `pip` (Python Paket Yöneticisi)
+
+### 2.2 Yükleme Adımları
+
+Öncelikle, gerekli bağımlılıkları yükleyin:
+
+```sh
+pip install -r requirements.txt
+```
+
+Alternatif olarak:
 
 ```sh
 pip install colorama speechrecognition pyperclip requests beautifulsoup4
 ```
 
-Ardından uygulamayı çalıştırın:
+Ardından, uygulamayı çalıştırmak için:
 
 ```sh
 python main.py
@@ -49,41 +74,72 @@ python main.py
 
 ---
 
-## 📌 **Nasıl Kullanılır?**
+## 3. Kullanım
 
-### 🎙️ **Sesli Komut Kullanımı:**
-1. Uygulamayı başlatın.
-2. Mikrofon ile konuşarak aşağıdaki komutları verebilirsiniz:
-   - "şifre oluştur"
-   - "hava durumu"
-   - "not al"
-3. Sistem, sesli komutları algılayarak ilgili işlemi gerçekleştirir.
+### 3.1 Terminal Komutları
 
-### ⌨️ **Yazılı Komut Kullanımı:**
-1. Program başlarken giriş yöntemi olarak "Yazı" seçeneğini belirleyin.
-2. Terminale aşağıdaki komutlardan birini girin:
+Korasistan, terminal üzerinden aşağıdaki komutlarla çalıştırılabilir:
+
+```sh
+>> şifre oluştur
+>> hava durumu
+>> not al
+>> haberler
+>> girdi değiştir
+>> çıkış
+```
+
+### 3.2 Sesli Komutlar
+
+Kullanıcı giriş yöntemi olarak mikrofonu seçtiğinde aşağıdaki sesli komutları verebilir:
+
+- "şifre oluştur"
+- "hava durumu"
+- "not al"
+- "haberler"
+
+---
+
+## 4. Uygulama Modülleri
+
+### 4.1 🔑 Şifre Oluşturucu (Passgen)
+
+- Kullanıcıdan alınan seçeneklere göre güçlü ve rastgele şifreler üretir.
+- Şifreler `pyperclip` ile otomatik olarak panoya kopyalanır.
+- Büyük harf, özel karakter ve sayı içeriğini özelleştirme imkanı sağlar.
+
+### 4.2 🌦 Hava Durumu (Weather)
+
+- OpenWeatherMap API ile gerçek zamanlı hava durumu verilerini alır.
+- Kullanıcının belirlediği şehir için sıcaklık, hissedilen sıcaklık ve hava durumu bilgilerini listeler.
+- Gün doğumu ve gün batımı saatlerini gösterir.
+
+### 4.3 📝 Not Defteri (Note)
+
+- Kullanıcıların not almasına, notlarını listelemesine ve silmesine olanak tanır.
+- Notlar `.txt` formatında kaydedilir.
+- Basit bir metin tabanlı arayüz sunar.
+
+### 4.4 📰 Haber Önizleme (News)
+
+- Haber kaynaklarından başlıkları çeker (`BeautifulSoup` ile).
+- Kullanıcı seçtiği haberleri tarayıcıda açabilir.
+- Mynet, Hürriyet, Sözcü gibi kaynakları destekler.
+
+---
+
+## 5. Geliştirme ve Katkıda Bulunma
+
+Projeye katkıda bulunmak için aşağıdaki adımları takip edebilirsiniz:
+
+1. Bu repoyu forkladıktan sonra yerel bilgisayarınıza klonlayın:
    ```sh
-   >> şifre oluştur
-   >> hava durumu
-   >> not al
+   git clone https://github.com/koray-killi/korasistan.git
    ```
-3. Komutunuzu çalıştırarak ilgili uygulamayı açabilirsiniz.
+2. Yeni bir özellik ekleyin veya mevcut bir hatayı düzeltin.
+3. Değişikliklerinizi push edin ve bir pull request oluşturun.
+
+Katkılarınız memnuniyetle karşılanacaktır! 🚀
 
 ---
-
-## 🔄 **Geliştirme Aşamasındaki Özellikler**
-- 📢 **Haberler Uygulaması** – Günlük haberleri çekecek.
-- 📊 **Gelişmiş Hava Durumu Grafikleri** – Görselleştirilmiş sıcaklık değişimleri.
-- 🔍 **Notlarda Arama ve Kategorilendirme** – Notları daha düzenli hale getirme.
-
----
-
-## 🤝 **Katkıda Bulunma**
-Projeyi geliştirmek isterseniz pull request gönderebilir veya hata bildirebilirsiniz. Her türlü katkıya açığız! ✨
-
----
-
-📌 **Lisans:** MIT License  
-📌 **Geliştirici:** koray-killi
-📌 **Sürüm:** v0.1
 
